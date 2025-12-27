@@ -6,11 +6,11 @@ A Python script that uses FreeCAD API to design a simple house with walls, roof,
 
 import sys
 import os
+import math
 
 try:
     import FreeCAD
     import Part
-    import Draft
 except ImportError:
     print("Error: FreeCAD module not found.")
     print("This script requires FreeCAD to be installed.")
@@ -100,13 +100,6 @@ class HouseDesigner:
         roof_height = 2000  # mm
         roof_overhang = 500  # mm
         
-        # Define points for roof triangles
-        # Front triangle
-        p1 = FreeCAD.Vector(-roof_overhang, self.house_width / 2, self.wall_height + 100)
-        p2 = FreeCAD.Vector(-roof_overhang, -roof_overhang, self.wall_height + 100)
-        p3 = FreeCAD.Vector(-roof_overhang, self.house_width + roof_overhang, self.wall_height + 100)
-        p4 = FreeCAD.Vector(-roof_overhang, self.house_width / 2, self.wall_height + 100 + roof_height)
-        
         # Create roof as two sloped planes
         roof_length = self.house_length + 2 * roof_overhang
         roof_slope_width = ((self.house_width / 2 + roof_overhang) ** 2 + roof_height ** 2) ** 0.5
@@ -118,7 +111,6 @@ class HouseDesigner:
         left_roof_obj.Placement.Base = FreeCAD.Vector(-roof_overhang, -roof_overhang, self.wall_height + 100)
         
         # Calculate rotation angle
-        import math
         angle = math.degrees(math.atan(roof_height / (self.house_width / 2 + roof_overhang)))
         left_roof_obj.Placement.Rotation = FreeCAD.Rotation(FreeCAD.Vector(1, 0, 0), angle)
         
@@ -231,10 +223,14 @@ class HouseDesigner:
     def export_step(self, filename="house_design.step"):
         """Export the house design to STEP format"""
         filepath = os.path.abspath(filename)
-        import ImportSTEP
-        ImportSTEP.export(self.doc.Objects, filepath)
-        print(f"Design exported to STEP: {filepath}")
-        return filepath
+        try:
+            import ImportSTEP
+            ImportSTEP.export(self.doc.Objects, filepath)
+            print(f"Design exported to STEP: {filepath}")
+            return filepath
+        except ImportError:
+            print("Warning: ImportSTEP module not available")
+            return None
 
 
 def main():

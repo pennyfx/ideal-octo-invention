@@ -6,6 +6,7 @@ Integrates natural language parsing, floor plan generation, and FreeCAD 3D model
 
 import sys
 import os
+import math
 
 # Import our modules
 from ai_house_parser import AIHouseParser, HouseRequirements
@@ -166,7 +167,6 @@ class AIHouseDesigner:
     
     def _create_roof(self, length: int, width: int):
         """Create a simple pitched roof"""
-        import math
         
         roof_height = 2000  # mm peak height
         roof_overhang = 600  # mm
