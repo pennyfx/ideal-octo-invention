@@ -1,0 +1,15 @@
+# FreeCAD House Designer Requirements
+# 
+# Note: FreeCAD cannot be installed via pip. 
+# Please install FreeCAD from: https://www.freecad.org/downloads.php
+#
+# For Ubuntu/Debian:
+#   sudo apt-get install freecad
+#
+# For macOS:
+#   brew install freecad
+#
+# For Windows:
+#   Download installer from https://www.freecad.org/downloads.php
+#
+# This script uses the FreeCAD Python API which is included with FreeCAD installation
