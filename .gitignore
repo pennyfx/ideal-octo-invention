@@ -57,3 +57,8 @@ htmlcov/
 /tmp/
 *.tmp
 *.bak
+
+# Web
+node_modules/
+.env
+.env.local

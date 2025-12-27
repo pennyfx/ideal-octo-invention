@@ -1,114 +1,133 @@
-# FreeCAD AI House Designer
+# AI House Designer
 
-A Python application that uses AI and the FreeCAD API to design houses from natural language descriptions. Simply describe your dream house in plain English, and the AI will generate a complete 3D model with floor plan, rooms, and structure.
+A multi-platform application that uses AI to design houses from natural language descriptions. Simply describe your dream house in plain English, and the AI will generate a complete 3D model with floor plan, rooms, and structure.
 
-## ✨ Key Features
+## Platforms
 
-### 🤖 AI-Powered Natural Language Design
-- **Describe your house in plain English**: "3000 sqft Ranch style house, 4 bedrooms, 4 bathrooms, gameroom, 3 car garage"
-- **Automatic parsing**: Extracts style, size, room count, and special features
-- **Smart floor plan generation**: Creates realistic room layouts with proper dimensions
-- **3D model creation**: Builds complete FreeCAD 3D models automatically
+This project includes two implementations:
 
-### 🏗️ Comprehensive House Components
-- **Automated House Design**: Creates complete house structure programmatically
-- **Parametric Design**: Easily customizable dimensions for walls, doors, and windows
-- **Complete Structure**: Includes floor, walls, doors, windows, and pitched roof
-- **Room-by-room modeling**: Individual rooms with proper dimensions and windows
-- **Export Support**: Save designs in FreeCAD format (.FCStd) and STEP format (.step)
-- **Well-documented Code**: Clear class structure with detailed comments
+| Platform | Technology | 3D Rendering | Requirements |
+|----------|------------|--------------|--------------|
+| **Web** | JavaScript, Three.js | WebGL Canvas | Modern browser |
+| **Python** | Python 3.6+, FreeCAD | FreeCAD API | FreeCAD installed |
 
-## 🏠 What the AI Can Understand
+## Quick Start
 
-The AI house designer can parse and understand:
+### Web Version (Recommended)
 
-### House Specifications
-- **Size**: "3000 sqft", "2500 sq ft", "1800 square feet"
-- **Style**: Ranch, Colonial, Victorian, Modern, Contemporary, Craftsman, Cape Cod, Mediterranean, Tudor
-- **Stories**: Single story, two story, three story
-
-### Rooms
-- **Bedrooms**: "4 bedrooms", "3 bed", "5 BR"
-- **Bathrooms**: "3 bathrooms", "2.5 bath", "4 BA"
-- **Special rooms**: gameroom, den, office, study, library, media room, home theater, gym, mudroom, laundry, pantry
-
-### Special Features
-- **Bathroom types**: Jack and Jill, ensuite, master bath, half bath, powder room
-- **Garage**: "3 car garage", "2-car garage"
-- **Additional spaces**: Attic, basement
-
-## 🚀 Quick Start - AI Designer
-
-The easiest way to design a house is using natural language:
+The easiest way to use the AI House Designer:
 
 ```bash
+# Navigate to web directory
+cd web
+
+# Serve with any static file server
+python3 -m http.server 8080
+
+# Open in browser
+# http://localhost:8080
+```
+
+Or simply open `web/index.html` directly in your browser.
+
+### Python Version
+
+For CAD-quality output with FreeCAD:
+
+```bash
+cd python
+
+# Run with Python (generates floor plan + summary)
 python3 ai_house_designer.py
+
+# Or run within FreeCAD for full 3D modeling
+freecadcmd ai_house_designer.py
 ```
 
-Then simply describe your house when prompted:
+## Features
+
+### AI-Powered Natural Language Design
+
+Describe your house in plain English:
+- "3000 sqft Ranch style house, 4 bedrooms, 4 bathrooms, gameroom, 3 car garage"
+- "2500 sq ft Colonial, 3 bed, 2.5 bath, 2 car garage, office, mudroom"
+- "Modern 1800 sqft home with 3 bedrooms, 2 bathrooms, 2 car garage"
+
+### What the AI Understands
+
+| Category | Examples |
+|----------|----------|
+| **Size** | "3000 sqft", "2500 sq ft", "1800 square feet" |
+| **Style** | Ranch, Colonial, Victorian, Modern, Contemporary, Craftsman, Cape Cod, Mediterranean, Tudor |
+| **Bedrooms** | "4 bedrooms", "3 bed", "5 BR" |
+| **Bathrooms** | "3 bathrooms", "2.5 bath", "4 BA" |
+| **Special Rooms** | gameroom, den, office, study, library, media room, home theater, gym, mudroom, laundry, pantry |
+| **Features** | Jack and Jill bathroom, ensuite, half bath, attic, basement |
+| **Garage** | "3 car garage", "2-car garage" |
+
+## Project Structure
+
 ```
-"3000 sqft Ranch style house, 4 bedrooms, 4 bathrooms. 
-Jack and Jill bathroom. Gameroom. 3 car garage. Attic man den."
+ideal-octo-invention/
+├── README.md                    # This file
+├── CODE_REVIEW.md               # Code review document
+├── web/                         # Three.js Web Application
+│   ├── index.html              # Main HTML entry point
+│   ├── styles/
+│   │   └── main.css            # Application styles
+│   └── src/
+│       ├── parser.js           # Natural language parser
+│       ├── floorPlan.js        # Floor plan generator
+│       ├── houseRenderer.js    # Three.js 3D renderer
+│       └── app.js              # Main application logic
+│
+└── python/                      # Python/FreeCAD Application
+    ├── ai_house_designer.py    # Main AI-powered designer
+    ├── ai_house_parser.py      # Natural language parser
+    ├── floor_plan_generator.py # Room layout generator
+    ├── house_designer.py       # FreeCAD 3D modeling
+    ├── examples.py             # Example house designs
+    ├── test_ai_designer.py     # Test suite
+    └── requirements.txt        # Dependencies info
 ```
 
-The AI will:
-1. ✅ Parse your requirements
-2. ✅ Generate a complete floor plan with all rooms
-3. ✅ Create a 3D model in FreeCAD (if installed)
-4. ✅ Export summary and design files
+## Web Version Details
 
-### Example Output
+### Features
+- Real-time 3D visualization with Three.js
+- Interactive camera controls (orbit, zoom, pan)
+- Multiple view modes (Top, Front, Side, 3D Isometric)
+- Toggle roof visibility
+- Wireframe mode
+- 2D floor plan view
+- Room color coding
+- Responsive design
 
-```
-AI-POWERED HOUSE DESIGNER
-======================================================================
+### Browser Requirements
+- Modern browser with WebGL support
+- Chrome, Firefox, Safari, or Edge recommended
 
-Input Description:
-  "3000 sqft Ranch style house, 4 bedrooms, 4 bathrooms. 
-   Jack and Jill bathroom. Gameroom. 3 car garage."
+### Usage
 
-Step 1: Parsing house requirements...
-  ✓ Style: Ranch
-  ✓ Size: 3000 sq ft
-  ✓ Bedrooms: 4
-  ✓ Bathrooms: 4
-  ✓ Special rooms: gameroom, den
-  ✓ Garage: 3 cars
+1. Open `web/index.html` in your browser
+2. Enter a house description or click an example
+3. Click "Generate House" to create the 3D model
+4. Use view controls to explore the design
+5. Toggle roof or wireframe mode as needed
 
-Step 2: Generating floor plan...
-  ✓ Created 16 rooms
-  ✓ Total area: 2940 sq ft
-  ✓ Rooms: Master Bedroom, 3 Bedrooms, Master Bath, 
-          Jack and Jill Bath, 2 Bathrooms, Kitchen, 
-          Dining Room, Living Room, Gameroom, Den, 
-          3 Car Garage, Foyer, Hallway
+## Python Version Details
 
-Step 3: Creating 3D model in FreeCAD...
-  ✓ Foundation: 22.5m x 19.1m
-  ✓ 16 rooms with walls
-  ✓ Pitched roof
+### Features
+- CAD-quality 3D model generation
+- Export to FreeCAD (.FCStd) and STEP formats
+- Detailed floor plan with room dimensions
+- Works with or without FreeCAD installed
 
-HOUSE DESIGN COMPLETED
-```
-
-## House Components
-
-The generated house includes:
-- **Floor**: Solid foundation base (100mm thick)
-- **Walls**: Four walls with customizable thickness (default 200mm) and height (3000mm)
-- **Doors**: Front entrance door (900mm × 2100mm)
-- **Windows**: Three windows - back, left, and right walls (1200mm × 1500mm each)
-- **Roof**: Pitched roof with overhang (2000mm peak height)
-
-## Requirements
-
-- **FreeCAD**: Version 0.19 or later (for 3D modeling)
-- **Python**: 3.6 or later
-- **No external dependencies**: Works with just Python standard library and FreeCAD
+### Requirements
+- Python 3.6+
+- FreeCAD (optional, for 3D modeling)
 
 ### Installing FreeCAD
-
-FreeCAD must be installed on your system for 3D model generation:
 
 **Ubuntu/Debian:**
 ```bash
@@ -122,35 +141,9 @@ brew install freecad
 ```
 
 **Windows:**
-- Download the installer from [FreeCAD Downloads](https://www.freecad.org/downloads.php)
-- Run the installer and follow the instructions
+Download from [FreeCAD Downloads](https://www.freecad.org/downloads.php)
 
-**Note**: The AI parser and floor plan generator work without FreeCAD. You'll get a complete room list and floor plan summary even without FreeCAD installed.
-
-## 📖 Usage
-
-### Method 1: AI-Powered Design (Recommended) 🌟
-
-Use natural language to describe your house:
-
-```bash
-python3 ai_house_designer.py
-```
-
-Or run directly in FreeCAD for full 3D modeling:
-```bash
-freecadcmd ai_house_designer.py
-```
-
-**Example descriptions you can use:**
-- "3000 sqft Ranch style house, 4 bedrooms, 4 bathrooms. Jack and Jill bathroom. Gameroom. 3 car garage. Attic man den."
-- "2500 sq ft Colonial, 3 bed, 2.5 bath, 2 car garage, office, mudroom"
-- "Modern 1800 sqft home with 3 bedrooms, 2 bathrooms, 2 car garage"
-- "4000 sqft Contemporary with 5 bedrooms, 3.5 bathrooms, home theater, gym, wine cellar, 3 car garage"
-
-### Method 2: Programmatic API
-
-Use the AI designer programmatically in your own code:
+### Usage
 
 ```python
 from ai_house_designer import AIHouseDesigner
@@ -162,160 +155,58 @@ designer = AIHouseDesigner()
 description = "3000 sqft Ranch, 4 bed, 3 bath, 2 car garage, office"
 requirements, rooms, doc = designer.design_from_description(description)
 
-# Save the design
-if doc:  # If FreeCAD is available
-    designer.save_design("my_house.FCStd")
-
-# Export summary
+# Save outputs
+designer.save_design("my_house.FCStd")
 designer.export_summary("my_house_summary.txt")
 ```
 
-### Method 3: Manual House Design
+## Architecture
 
-Use the basic house designer for simple predefined houses:
+Both platforms share the same 3-layer architecture:
 
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      USER INTERFACE                          │
+│  Web: HTML/CSS/JS Canvas    |    Python: CLI/FreeCAD GUI    │
+└────────────────────────┬────────────────────────────────────┘
+                         │
+┌────────────────────────▼────────────────────────────────────┐
+│                   AI HOUSE DESIGNER                          │
+│  Orchestrates parsing, floor planning, and 3D modeling      │
+└────────────────────────┬────────────────────────────────────┘
+                         │
+        ┌────────────────┼────────────────┐
+        │                │                │
+┌───────▼────────┐ ┌────▼──────────┐ ┌──▼────────────────┐
+│ AI PARSER      │ │ FLOOR PLAN    │ │ 3D RENDERER       │
+│                │ │ GENERATOR     │ │                   │
+│ • Parse NL     │ │ • Room sizes  │ │ Web: Three.js     │
+│ • Extract reqs │ │ • Arrangement │ │ Python: FreeCAD   │
+└────────────────┘ └───────────────┘ └───────────────────┘
+```
+
+## Testing
+
+### Web
+Open `web/index.html` and try different house descriptions.
+
+### Python
 ```bash
-python3 house_designer.py
+cd python
+python3 test_ai_designer.py
 ```
 
-Or run examples:
-```bash
-python3 examples.py
-```
+## Output Examples
 
-### Method 4: Run in FreeCAD GUI
+### Web Version
+- Interactive 3D model in browser
+- 2D floor plan visualization
+- Room list with color coding
 
-1. Open FreeCAD application
-2. Go to **Macro → Macros...**
-3. Click **Create** and name it (e.g., "ai_house_designer")
-4. Copy the contents of `ai_house_designer.py` into the macro editor
-5. Click **Execute** to run
-
-
-## 📁 Project Structure
-
-```
-ideal-octo-invention/
-├── ai_house_designer.py      # Main AI-powered house designer
-├── ai_house_parser.py         # Natural language parser
-├── floor_plan_generator.py    # Room layout generator
-├── house_designer.py          # Basic FreeCAD house builder
-├── examples.py                # Example house designs
-├── requirements.txt           # Dependencies info
-├── .gitignore                 # Git ignore file
-└── README.md                  # This file
-```
-
-## Output Files
-
-The AI house designer generates:
-- **[style]_house_[size]sqft.FCStd**: FreeCAD 3D model (can be opened and edited in FreeCAD)
-- **house_design_summary.txt**: Detailed text summary with room list and dimensions
-- **house_design.step**: STEP format for CAD interoperability (optional)
-
-## 🎨 Customization
-
-### AI-Based Customization
-
-Simply modify your natural language description:
-- "5000 sqft luxury modern estate with 6 bedrooms, 5 bathrooms, wine cellar, home theater"
-- "Cozy 1500 sqft cottage with 2 bedrooms, 1.5 bathrooms, fireplace, sunroom"
-
-### Programmatic Customization
-
-For the basic house designer, modify parameters:
-
-```python
-from house_designer import HouseDesigner
-
-# Create a custom house
-designer = HouseDesigner(doc_name="MyCustomHouse")
-
-# Customize dimensions
-designer.house_length = 12000  # 12 meters
-designer.house_width = 10000   # 10 meters
-designer.wall_height = 3500    # 3.5 meters
-
-# Build the house
-doc = designer.build_house()
-
-# Save the design
-designer.save_design("my_custom_house.FCStd")
-```
-
-## 🏗️ Architecture
-
-### AI House Designer Components
-
-1. **AIHouseParser** (`ai_house_parser.py`)
-   - Parses natural language descriptions
-   - Extracts: size, style, rooms, features
-   - Supports various input formats
-
-2. **FloorPlanGenerator** (`floor_plan_generator.py`)
-   - Generates room layouts
-   - Calculates room dimensions
-   - Arranges rooms in floor plan
-   - Handles special room types
-
-3. **AIHouseDesigner** (`ai_house_designer.py`)
-   - Orchestrates the entire process
-   - Integrates parser + floor plan + 3D model
-   - Creates FreeCAD 3D models
-   - Exports results
-
-4. **HouseDesigner** (`house_designer.py`)
-   - Core FreeCAD 3D modeling
-   - Creates walls, floors, roofs
-   - Adds doors and windows
-   - Exports to various formats
-
-## 📝 More Examples
-
-```python
-from ai_house_designer import AIHouseDesigner
-
-designer = AIHouseDesigner()
-
-# Example 1: Luxury home
-designer.design_from_description(
-    "5000 sqft Mediterranean villa, 5 bedrooms, 4.5 bathrooms, "
-    "home theater, wine cellar, gym, 3 car garage"
-)
-
-# Example 2: Starter home
-designer.design_from_description(
-    "1500 sqft Ranch, 3 bed, 2 bath, 2 car garage"
-)
-
-# Example 3: Family home
-designer.design_from_description(
-    "3200 sqft Colonial, 4 bedrooms, 3 bathrooms, "
-    "Jack and Jill bathroom, office, mudroom, 2 car garage"
-)
-```
-
-## 🧪 Testing
-
-Test the AI parser:
-```bash
-python3 ai_house_parser.py
-```
-
-Test floor plan generation:
-```bash
-python3 floor_plan_generator.py
-```
-
-Test basic house designer:
-```bash
-python3 house_designer.py
-```
-
-Test with examples:
-```bash
-python3 examples.py
-```
+### Python Version
+- `[style]_house_[size]sqft.FCStd` - FreeCAD 3D model
+- `house_design_summary.txt` - Detailed text summary
+- `house_design.step` - STEP format for CAD interoperability
 
 ## License
 
@@ -327,6 +218,6 @@ Contributions are welcome! Feel free to submit issues or pull requests.
 
 ## Resources
 
+- [Three.js Documentation](https://threejs.org/docs/)
 - [FreeCAD Official Website](https://www.freecad.org/)
-- [FreeCAD Python Scripting Documentation](https://wiki.freecad.org/Python_scripting_tutorial)
-- [FreeCAD API Documentation](https://freecad.github.io/SourceDoc/)
+- [FreeCAD Python Scripting](https://wiki.freecad.org/Python_scripting_tutorial)

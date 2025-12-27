@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI House Designer - Three.js</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="header">
+            <h1>AI House Designer</h1>
+            <p>Describe your dream house in natural language</p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-container">
+            <!-- Left Panel - Input & Controls -->
+            <aside class="control-panel">
+                <div class="input-section">
+                    <label for="description">House Description:</label>
+                    <textarea
+                        id="description"
+                        placeholder="e.g., 3000 sqft Ranch style house, 4 bedrooms, 4 bathrooms, gameroom, 3 car garage"
+                        rows="4"
+                    ></textarea>
+                    <button id="generate-btn" class="btn-primary">Generate House</button>
+                </div>
+
+                <!-- Example Descriptions -->
+                <div class="examples-section">
+                    <h3>Examples:</h3>
+                    <button class="btn-example" data-desc="3000 sqft Ranch style house, 4 bedrooms, 4 bathrooms. Jack and Jill bathroom. Gameroom. 3 car garage.">
+                        Ranch 3000 sqft
+                    </button>
+                    <button class="btn-example" data-desc="2500 sq ft Colonial, 3 bed, 2.5 bath, 2 car garage, office, mudroom">
+                        Colonial 2500 sqft
+                    </button>
+                    <button class="btn-example" data-desc="Modern 1800 sqft home with 3 bedrooms, 2 bathrooms, 2 car garage">
+                        Modern 1800 sqft
+                    </button>
+                    <button class="btn-example" data-desc="4000 sqft Victorian, 5 bedrooms, 3.5 bathrooms, library, home theater, 3 car garage">
+                        Victorian 4000 sqft
+                    </button>
+                </div>
+
+                <!-- Parsed Requirements Display -->
+                <div class="requirements-section" id="requirements-display">
+                    <h3>Parsed Requirements:</h3>
+                    <div id="requirements-content">
+                        <p class="placeholder">Generate a house to see requirements</p>
+                    </div>
+                </div>
+
+                <!-- Room List -->
+                <div class="rooms-section" id="rooms-display">
+                    <h3>Room List:</h3>
+                    <div id="rooms-content">
+                        <p class="placeholder">Generate a house to see rooms</p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right Panel - 3D View -->
+            <main class="viewer-panel">
+                <div id="canvas-container">
+                    <canvas id="house-canvas"></canvas>
+                </div>
+
+                <!-- View Controls -->
+                <div class="view-controls">
+                    <button id="view-top" class="btn-view" title="Top View">Top</button>
+                    <button id="view-front" class="btn-view" title="Front View">Front</button>
+                    <button id="view-side" class="btn-view" title="Side View">Side</button>
+                    <button id="view-iso" class="btn-view active" title="Isometric View">3D</button>
+                    <span class="separator">|</span>
+                    <button id="toggle-roof" class="btn-view" title="Toggle Roof">Roof</button>
+                    <button id="toggle-wireframe" class="btn-view" title="Toggle Wireframe">Wire</button>
+                </div>
+
+                <!-- Floor Plan 2D Canvas -->
+                <div class="floor-plan-container">
+                    <h3>2D Floor Plan</h3>
+                    <canvas id="floor-plan-canvas"></canvas>
+                </div>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>AI House Designer | Three.js Web Version</p>
+        </footer>
+    </div>
+
+    <!-- Three.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+    <!-- Application Modules -->
+    <script src="src/parser.js"></script>
+    <script src="src/floorPlan.js"></script>
+    <script src="src/houseRenderer.js"></script>
+    <script src="src/app.js"></script>
+</body>
+</html>
