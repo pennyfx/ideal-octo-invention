@@ -7,6 +7,11 @@
 *.igs
 *.stl
 
+# House design outputs
+house_design_summary.txt
+test_house_summary.txt
+*_house_*.FCStd
+
 # Python
 __pycache__/
 *.py[cod]
